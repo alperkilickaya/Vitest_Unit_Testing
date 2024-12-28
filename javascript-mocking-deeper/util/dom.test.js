@@ -9,15 +9,18 @@ import { Window } from "happy-dom";
 
 import { showError } from "./dom";
 
+// create a virtual document
 const htmlDocPath = path.join(process.cwd(), "index.html");
 const htmlDocumentContent = fs.readFileSync(htmlDocPath).toString();
 
 const window = new Window();
 const document = window.document;
 
+// Mock the global document object
 vi.stubGlobal("document", document);
 
 describe("showError", () => {
+  // Reset the document body before each test
   beforeEach(() => {
     document.body.innerHTML = "";
     document.write(htmlDocumentContent);
